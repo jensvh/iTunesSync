@@ -11,10 +11,11 @@ import me.jensvh.itunes.com.IITSource;
 import me.jensvh.itunes.com.IITUserPlaylist;
 import me.jensvh.itunes.com.IiTunes;
 import me.jensvh.itunessync.data.PlaylistStorage;
+import me.jensvh.itunessync.data.TrackStorage;
 
 public class SyncItunesToMusicFolder {
 
-    // TODO: download all playlists from spotify
+    // TODO: sync all playlists from spotify
     // Or use a different list, some alfabetic one
     public static void main(String[] args) throws UnsupportedTagException, InvalidDataException, IOException {
         // Start itunes connection
@@ -50,9 +51,10 @@ public class SyncItunesToMusicFolder {
             
             for (int j = 0; j < songCount; j++) {
                 File song = songs[j];
+                TrackStorage track = new TrackStorage(song);
                 
                 // Check if this song already exist in playlist, if not add to playlist
-                if (!storage.contains(song) && storage.isUserPlaylist()) {
+                if (!storage.contains(track) && storage.isUserPlaylist()) {
                     IITUserPlaylist userPlaylist = new IITUserPlaylist(playlist);
 
                     userPlaylist.addFile(song.getPath());

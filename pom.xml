@@ -5,11 +5,26 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>ItunesSync</name>
   
+  <repositories>
+    <repository>
+      <id>jboss-maven2-release-repository</id>
+      <name>JBoss 3rd-party Repository</name>
+      <url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.mpatric</groupId>
       <artifactId>mp3agic</artifactId>
       <version>0.9.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.jacob/jacob -->
+	<dependency>
+      <groupId>com.jacob</groupId>
+      <artifactId>jacob</artifactId>
+      <version>1.10</version>
+	</dependency>
+    
   </dependencies>
 </project>

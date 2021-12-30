@@ -1,6 +1,7 @@
 package me.jensvh.itunessync.data;
 
-import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 import me.jensvh.itunes.com.IITPlaylist;
 import me.jensvh.itunes.com.IITTrack;
@@ -8,7 +9,7 @@ import me.jensvh.itunes.com.IITrackCollection;
 
 public class PlaylistStorage {
     
-    private TrackStorage[] tracks;
+    private Set<TrackStorage> tracks;
     private int count;
     private boolean isUserPlaylist = false;
     
@@ -16,22 +17,18 @@ public class PlaylistStorage {
         IITrackCollection collection = playlist.getTracks();
         count = collection.getCount();
         
-        tracks = new TrackStorage[count];
+        tracks = new HashSet<TrackStorage>(count, 1.0f);
         isUserPlaylist = playlist.isUserPlaylist();
         
         for (int i = 0; i < count; i++) {
             IITTrack track = collection.getItem(i+1);
-            tracks[i] = new TrackStorage(track);
+            tracks.add(new TrackStorage(track));
         }
         System.out.println("Tracks initialised, count: " + count);
     }
 
-    public boolean contains(File song) {
-        for (int i = 0; i < count; i++) {
-            if (tracks[i].equals(song))
-                return true;
-        }
-        return false;
+    public boolean contains(TrackStorage song) {
+        return tracks.contains(song);
     }
 
     public boolean isUserPlaylist() {

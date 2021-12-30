@@ -28,14 +28,12 @@ public class Utils {
     }});
     
     public static FileFilter filterPlaylistFolders = new FileFilter() {
-        @Override
         public boolean accept(File file) {
             return file.isDirectory() && !foldersToIgnore.contains(file.getName());
         }
     };
     
     public static FilenameFilter filterSongs = new FilenameFilter() {
-        @Override
         public boolean accept(File dir, String name) {
             return name.toLowerCase().endsWith(".mp3");
         }
