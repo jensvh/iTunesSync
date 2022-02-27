@@ -16,6 +16,13 @@ public class IITUserPlaylist extends IITPlaylist {
     
     public boolean addFile(String path) {
         Variant variant = Dispatch.call(object, "AddFile", path);
+        
+        try {
+            Thread.sleep(100L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
         if (variant.isNull()) {
             return false;
         }

@@ -25,6 +25,7 @@ public class Utils {
         add("iTunes");
         add("MEmu Music");
         add("spotdl-temp");
+        add("lib");
     }});
     
     public static FileFilter filterPlaylistFolders = new FileFilter() {

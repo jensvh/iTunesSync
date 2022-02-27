@@ -19,6 +19,7 @@ public class SyncItunesToMusicFolder {
     // Or use a different list, some alfabetic one
     public static void main(String[] args) throws UnsupportedTagException, InvalidDataException, IOException {
         // Start itunes connection
+        System.out.println("Linking..");
         ComImpl.initialize();
         
         IiTunes itunes = new IiTunes();
@@ -39,7 +40,7 @@ public class SyncItunesToMusicFolder {
             // TODO: it seems there is a max on this +-136
             File[] songs = folder.listFiles(Utils.filterSongs);
             int songCount = songs.length;
-            System.out.println(songCount);
+            System.out.println("Playlist " + playListName + " has " + songCount + " songs.");
             // Check if playlist already exist, if not create one
             IITPlaylist playlist = library.getPlaylists().getItemByName(playListName);
             if (playlist == null) {
@@ -54,11 +55,19 @@ public class SyncItunesToMusicFolder {
                 TrackStorage track = new TrackStorage(song);
                 
                 // Check if this song already exist in playlist, if not add to playlist
+                
                 if (!storage.contains(track) && storage.isUserPlaylist()) {
                     IITUserPlaylist userPlaylist = new IITUserPlaylist(playlist);
-
+                    
+                    // Print some stats out
+                    System.out.println(" --- Song added ---");
+                    System.out.println(track.getTitle() + " -> " + track.getTitle().replaceAll("[^A-Za-z0-9]", ""));
+                    System.out.println(track.getArtist() + " -> " + track.getArtist().replaceAll("[^A-Za-z0-9]", ""));
+                    System.out.println(track.getAlbum() + " -> " + track.getAlbum().replaceAll("[^A-Za-z0-9]", ""));
+                    
                     userPlaylist.addFile(song.getPath());
                 }
+                
             }
             
             System.out.println(playListName);
