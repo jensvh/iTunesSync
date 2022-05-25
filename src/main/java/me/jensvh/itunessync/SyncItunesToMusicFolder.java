@@ -27,12 +27,15 @@ public class SyncItunesToMusicFolder {
         System.out.println("Connection to iTunes established.");
         
         // Get playlist folders
-        File currentFolder = new File(System.getProperty("user.home") + "/Music"); // <=> System.getProperty("user.dir")
+        File currentFolder = new File(System.getProperty("user.dir")); // <=> System.getProperty("user.dir")
+        //File currentFolder = new File("C:\\Users\\ikke\\Music");
+        System.out.println(currentFolder.getPath());
         File[] folders = currentFolder.listFiles(Utils.filterPlaylistFolders);
         int folderCount = folders.length;
         
         // Loop through all playlist folders
         for (int i = 0; i < folderCount; i++) {
+            System.out.println();
             File folder = folders[i];
             String playListName = folder.getName();
             
@@ -55,17 +58,21 @@ public class SyncItunesToMusicFolder {
                 TrackStorage track = new TrackStorage(song);
                 
                 // Check if this song already exist in playlist, if not add to playlist
+                //System.out.println(storage.contains(track));
+                //System.out.println(storage.isUserPlaylist());
+                //System.out.println();
                 
                 if (!storage.contains(track) && storage.isUserPlaylist()) {
                     IITUserPlaylist userPlaylist = new IITUserPlaylist(playlist);
                     
                     // Print some stats out
-                    System.out.println(" --- Song added ---");
+                    /*System.out.println(" --- Song added ---");
                     System.out.println(track.getTitle() + " -> " + track.getTitle().replaceAll("[^A-Za-z0-9]", ""));
                     System.out.println(track.getArtist() + " -> " + track.getArtist().replaceAll("[^A-Za-z0-9]", ""));
                     System.out.println(track.getAlbum() + " -> " + track.getAlbum().replaceAll("[^A-Za-z0-9]", ""));
-                    
+                    */
                     userPlaylist.addFile(song.getPath());
+                    //System.out.println("A song has been added.");
                 }
                 
             }

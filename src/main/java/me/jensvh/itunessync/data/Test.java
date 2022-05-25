@@ -7,7 +7,7 @@ import me.jensvh.itunessync.Utils;
 public class Test {
 
     public static void main(String[] args) {
-        String path = "C:\\Users\\Ikke\\Music\\Lotjes plaatjes💽🎶";
+        String path = "C:\\Users\\ikke\\Music\\bjorn";
         File folder = new File(path);
         
         File[] folders = folder.listFiles(Utils.filterSongs);
